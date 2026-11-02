@@ -1,0 +1,97 @@
+<main class="doc">
+  <div class="wrap">
+    <header>
+      <span class="eyebrow">Atsauksme</span>
+      <h1>Kā jums strādā Clickless?</h1>
+      <p>Paldies, ka lietojat mūsu risinājumu. Jūsu atsauksme palīdzēs citiem uzņēmumiem saprast, vai tas der arī viņiem. Aizpildīšana aizņem divas minūtes.</p>
+    </header>
+
+    <form id="reviewForm" method="POST" novalidate>
+      <div class="field">
+        <label class="field-label" for="rvName">Vārds, uzvārds <span class="req">*</span></label>
+        <input type="text" id="rvName" name="name" autocomplete="name" required placeholder="Jānis Bērziņš">
+      </div>
+      <div class="field">
+        <label class="field-label" for="rvCompany">Uzņēmums <span class="req">*</span></label>
+        <input type="text" id="rvCompany" name="company" autocomplete="organization" required placeholder="SIA Piemērs">
+      </div>
+      <div class="field">
+        <label class="field-label" for="rvRole">Amats vai nozare</label>
+        <input type="text" id="rvRole" name="role" placeholder="Īpašnieks, kafejnīca Rīgā">
+      </div>
+      <div class="field">
+        <label class="field-label" for="rvEmail">E-pasts <span class="req">*</span></label>
+        <input type="email" id="rvEmail" name="email" autocomplete="email" required placeholder="jusu@epasts.lv">
+        <span class="field-hint">Netiks publicēts. Vajadzīgs, lai varam precizēt atsauksmi.</span>
+      </div>
+      <fieldset class="field stars-field">
+        <legend class="field-label">Vērtējums <span class="req">*</span></legend>
+        <div class="stars">
+          <input type="radio" id="rv5" name="rating" value="5"><label for="rv5" title="5 no 5">★</label>
+          <input type="radio" id="rv4" name="rating" value="4"><label for="rv4" title="4 no 5">★</label>
+          <input type="radio" id="rv3" name="rating" value="3"><label for="rv3" title="3 no 5">★</label>
+          <input type="radio" id="rv2" name="rating" value="2"><label for="rv2" title="2 no 5">★</label>
+          <input type="radio" id="rv1" name="rating" value="1"><label for="rv1" title="1 no 5">★</label>
+        </div>
+      </fieldset>
+      <div class="field">
+        <label class="field-label" for="rvText">Atsauksme <span class="req">*</span></label>
+        <textarea id="rvText" name="message" required placeholder="Kas mainījās jūsu darbā? Cik laika ietaupāt? Kas varētu būt labāk?"></textarea>
+      </div>
+      <label class="consent" for="rvConsent">
+        <input type="checkbox" id="rvConsent" name="consent" required>
+        <span>Piekrītu, ka mana atsauksme, vārds un uzņēmuma nosaukums tiek publicēti vietnē clickless.lv. Piekrišanu varu atsaukt, rakstot uz info@clickless.lv.</span>
+      </label>
+
+      <input class="honey" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+      <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">Nosūtīt atsauksmi</button>
+    </form>
+  </div>
+</main>
+<script>
+  // Atsauksmes forma: Web3Forms, tāpat kā kontaktforma. Atsauksmes publicējam tikai ar piekrišanu.
+  (function () {
+    var WEB3FORMS_ACCESS_KEY = '1b3a3020-3223-46bb-9923-6e935b1da2f5';
+    var T = {
+      send: 'Nosūtīt atsauksmi', sending: 'Sūta…',
+      ok: 'Paldies! Atsauksme saņemta. Pirms publicēšanas jums to vēl parādīsim.',
+      errFields: 'Lūdzu, aizpildiet visus laukus ar zvaigznīti un atzīmējiet piekrišanu.',
+      errEmail: 'Lūdzu, ievadiet derīgu e-pasta adresi.',
+      errSend: 'Neizdevās nosūtīt. Mēģiniet vēlāk vai rakstiet uz info@clickless.lv.'
+    };
+    var form = document.getElementById('reviewForm');
+    var btn = document.getElementById('submitBtn'), msg = document.getElementById('formMsg');
+    function v(id) { return document.getElementById(id).value.trim(); }
+    function show(kind, key) { msg.className = 'form-msg show ' + kind; msg.textContent = T[key]; }
+    function done() { btn.disabled = false; btn.textContent = T.send; }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (form.querySelector('[name="botcheck"]').checked) return;
+      var rating = form.querySelector('[name="rating"]:checked');
+      if (!v('rvName') || !v('rvCompany') || !v('rvEmail') || !v('rvText') || !rating || !document.getElementById('rvConsent').checked) {
+        show('err', 'errFields'); return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('rvEmail'))) { show('err', 'errEmail'); return; }
+      btn.disabled = true; btn.textContent = T.sending;
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: 'Jauna atsauksme clickless.lv: ' + v('rvCompany') + ' (' + rating.value + '/5)',
+          from_name: 'clickless.lv',
+          name: v('rvName'), email: v('rvEmail'),
+          uznemums: v('rvCompany'), amats: v('rvRole'),
+          vertejums: rating.value + ' no 5',
+          message: v('rvText'),
+          piekrisana_publicet: 'Jā'
+        })
+      }).then(function (r) { return r.json(); }).then(function (data) {
+        done();
+        if (data.success) { show('ok', 'ok'); form.reset(); } else { show('err', 'errSend'); }
+      }).catch(function () { done(); show('err', 'errSend'); });
+    });
+  })();
+</script>

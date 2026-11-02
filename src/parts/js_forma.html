@@ -1,0 +1,47 @@
+<script>
+  // Kontaktforma: Web3Forms (fetch/JSON, bez lapas pārlādes) — tāpat kā pvnkalkulators.eu.
+  // Saņēmēja e-pasts lapas kodā neparādās, to nosaka piekļuves atslēga Web3Forms kontā.
+  (function () {
+    var WEB3FORMS_ACCESS_KEY = '1b3a3020-3223-46bb-9923-6e935b1da2f5';
+    var T = {
+      send: 'Nosūtīt', sending: 'Sūta…',
+      ok: 'Paldies! Ziņojums nosūtīts. Atbildēsim vienas darba dienas laikā.',
+      errFields: 'Lūdzu, ievadiet e-pastu un ziņojumu.',
+      errEmail: 'Lūdzu, ievadiet derīgu e-pasta adresi.',
+      errSend: 'Neizdevās nosūtīt. Mēģiniet vēlāk vai rakstiet uz info@clickless.lv.',
+      subject: 'Jauns ziņojums no clickless.lv'
+    };
+    var form = document.getElementById('contactForm');
+    if (!form) return;
+    var btn = document.getElementById('submitBtn'), msg = document.getElementById('formMsg');
+    var nameEl = document.getElementById('cfName'), emailEl = document.getElementById('cfEmail'), msgEl = document.getElementById('cfMsg');
+    var honeyEl = form.querySelector('[name="botcheck"]');
+    function show(kind, key) { msg.className = 'form-msg show ' + kind; msg.textContent = T[key]; }
+    function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+    function done() { btn.disabled = false; btn.textContent = T.send; }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (honeyEl.checked) return; // mēstule
+      if (!emailEl.value.trim() || !msgEl.value.trim()) { show('err', 'errFields'); return; }
+      if (!validEmail(emailEl.value.trim())) { show('err', 'errEmail'); return; }
+      btn.disabled = true; btn.textContent = T.sending;
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: nameEl.value.trim(),
+          email: emailEl.value.trim(),
+          tema: (document.getElementById('cfTopic') || {}).value || '',
+          message: msgEl.value.trim(),
+          subject: T.subject,
+          from_name: 'clickless.lv'
+        })
+      }).then(function (r) { return r.json(); }).then(function (data) {
+        done();
+        if (data.success) { show('ok', 'ok'); form.reset(); } else { show('err', 'errSend'); }
+      }).catch(function () { done(); show('err', 'errSend'); });
+    });
+  })();
+</script>

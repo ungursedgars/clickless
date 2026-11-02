@@ -1,0 +1,59 @@
+<!--meta
+title: Kontakti – Clickless
+description: Pastāstiet, ko vēlaties automatizēt. Atbildam vienas darba dienas laikā, pirmā saruna ir bez maksas.
+nav: kontakti
+-->
+<main>
+  <section class="band" id="kontakti">
+    <div class="wrap contact">
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Kontakti</span>
+        <h1 class="h2">Pastāstiet, ko vēlaties automatizēt</h1>
+        <p class="lead">Rēķini, kases Z pārskati, rezervācijas, e-veikals, video vai jebkurš cits darbs, ko darāt atkal un atkal: katru dienu, nedēļu vai mēnesi. Aprakstiet, kā tas notiek tagad.</p>
+        <ol class="next-steps">
+          <li><strong>Atbildam vienas darba dienas laikā</strong><span>Ar pāris precizējošiem jautājumiem.</span></li>
+          <li><strong>15–30 minūšu saruna</strong><span>Bez maksas un bez saistībām. Parādām, kā tas izskatītos pie jums.</span></li>
+          <li><strong>Konkrēts piedāvājums</strong><span>Ar cenu un termiņu. Gatavos botus uzstādām vienas dienas laikā.</span></li>
+        </ol>
+      </div>
+      <div class="contact-card">
+        <form id="contactForm" method="POST" novalidate>
+          <div class="field">
+            <label class="field-label" for="cfName">Vārds</label>
+            <input type="text" id="cfName" name="name" autocomplete="name" placeholder="Jūsu vārds">
+          </div>
+          <div class="field">
+            <label class="field-label" for="cfEmail">E-pasts <span class="req">*</span></label>
+            <input type="email" id="cfEmail" name="email" autocomplete="email" required placeholder="jusu@epasts.lv">
+          </div>
+          <div class="field">
+            <label class="field-label" for="cfTopic">Kas jūs interesē</label>
+            <select id="cfTopic" name="topic">
+              <option value="">Izvēlieties, ja zināt</option>
+              <option>Gatavie boti (rēķini, kase, rezervācijas)</option>
+              <option>Dokumenti un grāmatvedība</option>
+              <option>E-komercija</option>
+              <option>YouTube, Instagram un TikTok</option>
+              <option>Klienti, komanda un ikdiena</option>
+              <option>Mājaslapa</option>
+              <option>Vēl nezinu, gribu parunāt</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="cfMsg">Ziņojums <span class="req">*</span></label>
+            <textarea id="cfMsg" name="message" required placeholder="Kādi dokumenti jums ir un kur paiet laiks?"></textarea>
+          </div>
+
+          <!-- Pretmēstuļu slazds (netiek rādīts cilvēkiem) -->
+          <input class="honey" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+
+          <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">Nosūtīt</button>
+          <p class="form-note">Vai rakstiet uz <strong>info@clickless.lv</strong>. Atbildēsim vienas darba dienas laikā.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+{{part:js_forma}}

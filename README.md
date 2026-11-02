@@ -1,14 +1,25 @@
 # clickless.lv
 
-Clickless mājaslapa: statiska vietne (HTML + CSS), publicēta ar GitHub Pages uz domēna `clickless.lv`.
+Clickless mājaslapa: statiska vietne, publicēta ar GitHub Pages uz domēna `clickless.lv`.
 
-| Fails | Kas tas ir |
+## Kā mainīt
+Saknes `*.html` failus **nelabot ar roku**, tos ģenerē `build.py`:
+
+```bash
+python build.py
+```
+
+| Kur | Kas |
 |---|---|
-| `index.html` | sākumlapa: pakas un cenas, risinājumi, jūsu dati, BUJ, kontaktforma |
-| `privatuma-politika.html`, `noteikumi.html` | juridiskās lapas |
-| `atsauksme.html` | atsauksmju forma klientiem (noindex) |
-| `savienot/index.html` | Google OAuth atgriešanās lapa, pāradresē uz CLICKLESS_REKINI web app |
-| `style.css` | kopīgais stils, gaišā un tumšā tēma |
-| `assets/` | logotipi un favicon |
+| `dati/piedavajums.json` | viss piedāvājums: jomas, risinājumi (ar statusu), gatavās pakas un cenas, nozares |
+| `src/pages/*.html` | lapu saturs: sākums, boti, par mums, kontakti, juridiskās lapas, atsauksme |
+| `src/parts/*.html` | kopīgās daļas (sākuma bloks, BUJ, jūsu dati, skripti, logo) |
+| `style.css` | stils, gaišā un tumšā tēma |
+| `savienot/index.html` | Google OAuth atgriešanās lapa (atsevišķa, neģenerē) |
 
-Formas sūta caur Web3Forms. Atsauksmju sadaļa `index.html` ir paslēpta (`hidden`), līdz ir vismaz 3 īstas atsauksmes.
+`risinajumi.html` un `nozares.html` tiek ģenerētas pilnībā no datiem. `build.py` arī izveido
+`../lidu-karte.md`: katrai nozarei NACE kodi, meklēšanas vārdi, uzruna un ko piedāvāt (līdu aģentiem).
+
+Jauns risinājums vai nozare: pievieno ierakstu `dati/piedavajums.json` un palaid `python build.py`.
+
+Formas sūta caur Web3Forms. Atsauksmju sadaļa `par-mums.html` ir paslēpta (`hidden`), līdz ir vismaz 3 īstas atsauksmes.

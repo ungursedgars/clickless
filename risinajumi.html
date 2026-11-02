@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="lv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Risinājumi – Clickless</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Ko Clickless var automatizēt: dokumenti un grāmatvedība, e-komercija, YouTube un sociālie tīkli, klienti un komanda.">
+<meta name="theme-color" content="#ffffff">
+<script>
+  // Uzliek tēmu vēl pirms lapas zīmēšanas, lai tumšajā režīmā nav balta zibšņa (kā pvnkalkulators.eu)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('clickless-theme'); } catch (e) {}
+    t = t || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', t);
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'dark' ? '#0b0b0b' : '#ffffff');
+  })();
+</script>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Commissioner:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Clickless sākums">
+      <svg class="logo-svg" role="img" aria-label="clickless" xmlns="http://www.w3.org/2000/svg" viewBox="-20 -185 1015.6 220"><path fill="var(--logo-ink)" d="M100.0697350069735 0.0H34.658298465829844Q32.147838214783825 0.0 29.253835425383542 -0.592747559274756Q26.359832635983263 -1.185495118549512 23.535564853556487 -2.4407252440725244Q20.711297071129707 -3.695955369595537 18.13110181311018 -5.683403068340307Q15.550906555090656 -7.670850767085077 13.563458856345886 -10.495118549511854Q11.576011157601116 -13.319386331938633 10.390516039051604 -17.05020920502092Q9.205020920502092 -20.78103207810321 9.205020920502092 -25.453277545327754V-74.54672245467225Q9.205020920502092 -77.05718270571828 9.797768479776849 -79.95118549511855Q10.390516039051604 -82.84518828451883 11.645746164574618 -85.6694560669456Q12.90097629009763 -88.49372384937239 14.923291492329149 -91.07391910739192Q16.94560669456067 -93.65411436541144 19.769874476987447 -95.6415620641562Q22.594142259414227 -97.62900976290098 26.290097629009765 -98.81450488145049Q29.9860529986053 -100.0 34.658298465829844 -100.0H100.0697350069735V-81.86889818688982H34.658298465829844Q31.10181311018131 -81.86889818688982 29.21896792189679 -79.9860529986053Q27.336122733612275 -78.10320781032078 27.336122733612275 -74.40725244072524V-25.453277545327754Q27.336122733612275 -21.96652719665272 29.253835425383542 -20.04881450488145Q31.171548117154813 -18.13110181311018 34.658298465829844 -18.13110181311018H100.0697350069735ZM215.06555090655507 0.0H132.35983263598325Q130.40725244072524 0.0 128.73361227336125 -0.697350069735007Q127.05997210599722 -1.394700139470014 125.83960948396096 -2.6150627615062763Q124.6192468619247 -3.8354253835425385 123.92189679218968 -5.509065550906556Q123.22454672245468 -7.182705718270572 123.22454672245468 -9.135285913528591V-100.0H141.35564853556485V-18.13110181311018H215.06555090655507ZM252.6555090655509 0.0H234.5244072524407V-100.0H252.6555090655509ZM369.39470013947005 0.0H303.98326359832635Q301.4728033472803 0.0 298.5788005578801 -0.592747559274756Q295.68479776847977 -1.185495118549512 292.860529986053 -2.4407252440725244Q290.0362622036262 -3.695955369595537 287.4560669456067 -5.683403068340307Q284.87587168758716 -7.670850767085077 282.8884239888424 -10.495118549511854Q280.9009762900976 -13.319386331938633 279.7154811715481 -17.05020920502092Q278.5299860529986 -20.78103207810321 278.5299860529986 -25.453277545327754V-74.54672245467225Q278.5299860529986 -77.05718270571828 279.12273361227335 -79.95118549511855Q279.7154811715481 -82.84518828451883 280.97071129707115 -85.6694560669456Q282.22594142259413 -88.49372384937239 284.2482566248257 -91.07391910739192Q286.2705718270572 -93.65411436541144 289.094839609484 -95.6415620641562Q291.91910739191076 -97.62900976290098 295.6150627615063 -98.81450488145049Q299.31101813110183 -100.0 303.98326359832635 -100.0H369.39470013947005V-81.86889818688982H303.98326359832635Q300.4267782426778 -81.86889818688982 298.5439330543933 -79.9860529986053Q296.6610878661088 -78.10320781032078 296.6610878661088 -74.40725244072524V-25.453277545327754Q296.6610878661088 -21.96652719665272 298.5788005578801 -20.04881450488145Q300.49651324965134 -18.13110181311018 303.98326359832635 -18.13110181311018H369.39470013947005ZM497.36122733612274 0.0H471.629009762901L430.83403068340306 -40.86471408647141H418.07252440725244V-59.13528591352859H430.83403068340306L471.629009762901 -100.0H497.36122733612274L445.9665271966527 -50.0ZM410.8200836820084 0.0H392.68898186889817V-100.0H410.8200836820084Z"/><path fill="var(--brand)" d="M612.5690376569038 0.0H529.8633193863319Q527.910739191074 0.0 526.23709902371 -0.697350069735007Q524.563458856346 -1.394700139470014 523.3430962343097 -2.6150627615062763Q522.1227336122734 -3.8354253835425385 521.4253835425384 -5.509065550906556Q520.7280334728034 -7.182705718270572 520.7280334728034 -9.135285913528591V-100.0H538.8591352859136V-18.13110181311018H612.5690376569038ZM714.1059972105998 -40.86471408647141H656.8535564853556V-59.13528591352859H714.1059972105998ZM722.2649930264993 0.0H656.8535564853556Q653.0878661087866 0.0 648.6248256624825 -1.3249651324965133Q644.1617852161785 -2.6499302649930265 640.3612273361227 -5.683403068340307Q636.5606694560669 -8.716875871687588 634.0153417015341 -13.563458856345886Q631.4700139470013 -18.410041841004183 631.4700139470013 -25.453277545327754V-90.86471408647141Q631.4700139470013 -92.74755927475593 632.1673640167364 -94.42119944211996Q632.8647140864714 -96.09483960948397 634.0850767085076 -97.35006973500697Q635.3054393305439 -98.60529986052998 636.9790794979078 -99.30264993026499Q638.6527196652719 -100.0 640.60529986053 -100.0H722.2649930264993V-81.86889818688982H649.6011157601115V-25.453277545327754Q649.6011157601115 -21.896792189679218 651.4839609483961 -20.013947001394698Q653.3668061366806 -18.13110181311018 656.9930264993026 -18.13110181311018H722.2649930264993ZM841.8633193863319 -29.428172942817294Q841.8633193863319 -24.05857740585774 840.5034867503487 -19.769874476987447Q839.1436541143654 -15.481171548117155 836.9121338912134 -12.203626220362622Q834.6806136680614 -8.92608089260809 831.6820083682009 -6.624825662482566Q828.6834030683403 -4.323570432357044 825.4755927475593 -2.8591352859135286Q822.2677824267782 -1.394700139470014 818.9553695955369 -0.697350069735007Q815.6429567642957 0.0 812.7140864714087 0.0H742.7698744769874V-18.13110181311018H812.7140864714087Q817.9442119944213 -18.13110181311018 820.8382147838215 -21.199442119944212Q823.7322175732218 -24.267782426778243 823.7322175732218 -29.428172942817294Q823.7322175732218 -31.93863319386332 822.9651324965132 -34.030683403068345Q822.1980474198048 -36.122733612273365 820.7684797768479 -37.65690376569038Q819.3389121338912 -39.191073919107396 817.2817294281729 -40.0278940027894Q815.2245467224546 -40.86471408647141 812.7140864714087 -40.86471408647141H771.0125523012553Q766.6192468619247 -40.86471408647141 761.5285913528592 -42.433751743375176Q756.4379358437936 -44.00278940027894 752.0794979079499 -47.48953974895397Q747.721059972106 -50.97629009762901 744.8270571827057 -56.624825662482564Q741.9330543933055 -62.273361227336125 741.9330543933055 -70.43235704323571Q741.9330543933055 -78.59135285913528 744.8270571827057 -84.2050209205021Q747.721059972106 -89.8186889818689 752.0794979079499 -93.34030683403068Q756.4379358437936 -96.86192468619247 761.5285913528592 -98.43096234309624Q766.6192468619247 -100.0 771.0125523012553 -100.0H832.7280334728034V-81.86889818688982H771.0125523012553Q765.8521617852161 -81.86889818688982 762.9581589958159 -78.73082287308229Q760.0641562064156 -75.59274755927476 760.0641562064156 -70.43235704323571Q760.0641562064156 -65.20223152022315 762.9581589958159 -62.16875871687587Q765.8521617852161 -59.13528591352859 771.0125523012553 -59.13528591352859H812.7140864714087H812.8535564853556Q815.7824267782427 -59.06555090655509 819.0599721059972 -58.33333333333333Q822.3375174337517 -57.601115760111576 825.5801952580196 -56.06694560669456Q828.8228730822873 -54.532775453277544 831.7517433751743 -52.19665271966527Q834.6806136680614 -49.860529986053 836.9470013947001 -46.58298465829847Q839.2133891213389 -43.30543933054393 840.5383542538355 -39.05160390516039Q841.8633193863319 -34.79776847977685 841.8633193863319 -29.428172942817294ZM959.020920502092 -29.428172942817294Q959.020920502092 -24.05857740585774 957.6610878661088 -19.769874476987447Q956.3012552301255 -15.481171548117155 954.0697350069736 -12.203626220362622Q951.8382147838215 -8.92608089260809 948.839609483961 -6.624825662482566Q945.8410041841005 -4.323570432357044 942.6331938633194 -2.8591352859135286Q939.4253835425384 -1.394700139470014 936.1129707112971 -0.697350069735007Q932.8005578800559 0.0 929.8716875871688 0.0H859.9274755927476V-18.13110181311018H929.8716875871688Q935.1018131101814 -18.13110181311018 937.9958158995817 -21.199442119944212Q940.8898186889819 -24.267782426778243 940.8898186889819 -29.428172942817294Q940.8898186889819 -31.93863319386332 940.1227336122734 -34.030683403068345Q939.3556485355649 -36.122733612273365 937.9260808926081 -37.65690376569038Q936.4965132496513 -39.191073919107396 934.439330543933 -40.0278940027894Q932.3821478382148 -40.86471408647141 929.8716875871688 -40.86471408647141H888.1701534170154Q883.7768479776848 -40.86471408647141 878.6861924686193 -42.433751743375176Q873.5955369595538 -44.00278940027894 869.23709902371 -47.48953974895397Q864.8786610878661 -50.97629009762901 861.9846582984659 -56.624825662482564Q859.0906555090656 -62.273361227336125 859.0906555090656 -70.43235704323571Q859.0906555090656 -78.59135285913528 861.9846582984659 -84.2050209205021Q864.8786610878661 -89.8186889818689 869.23709902371 -93.34030683403068Q873.5955369595538 -96.86192468619247 878.6861924686193 -98.43096234309624Q883.7768479776848 -100.0 888.1701534170154 -100.0H949.8856345885636V-81.86889818688982H888.1701534170154Q883.0097629009763 -81.86889818688982 880.115760111576 -78.73082287308229Q877.2217573221758 -75.59274755927476 877.2217573221758 -70.43235704323571Q877.2217573221758 -65.20223152022315 880.115760111576 -62.16875871687587Q883.0097629009763 -59.13528591352859 888.1701534170154 -59.13528591352859H929.8716875871688H930.0111576011158Q932.9400278940028 -59.06555090655509 936.2175732217573 -58.33333333333333Q939.4951185495119 -57.601115760111576 942.7377963737797 -56.06694560669456Q945.9804741980474 -54.532775453277544 948.9093444909345 -52.19665271966527Q951.8382147838215 -49.860529986053 954.1046025104603 -46.58298465829847Q956.370990237099 -43.30543933054393 957.6959553695956 -39.05160390516039Q959.020920502092 -34.79776847977685 959.020920502092 -29.428172942817294Z"/><g style="color:var(--brand)" fill="currentColor" transform="translate(243.59,-139.20) scale(1.307) translate(-279.75,-177)"><circle cx="279.75" cy="177" r="11" fill="none" stroke="currentColor" stroke-width="6"/><line x1="291.75" y1="177.00" x2="299.25" y2="177.00" stroke="currentColor" stroke-width="6.5"/><line x1="288.24" y1="185.49" x2="293.54" y2="190.79" stroke="currentColor" stroke-width="6.5"/><line x1="279.75" y1="189.00" x2="279.75" y2="196.50" stroke="currentColor" stroke-width="6.5"/><line x1="271.26" y1="185.49" x2="265.96" y2="190.79" stroke="currentColor" stroke-width="6.5"/><line x1="267.75" y1="177.00" x2="260.25" y2="177.00" stroke="currentColor" stroke-width="6.5"/><line x1="271.26" y1="168.51" x2="265.96" y2="163.21" stroke="currentColor" stroke-width="6.5"/><line x1="279.75" y1="165.00" x2="279.75" y2="157.50" stroke="currentColor" stroke-width="6.5"/><line x1="288.24" y1="168.51" x2="293.54" y2="163.21" stroke="currentColor" stroke-width="6.5"/></g></svg>
+    </a>
+    <nav class="nav" aria-label="Galvenā navigācija">
+      <a href="boti.html">Gatavie boti</a>
+      <a href="risinajumi.html" aria-current="page">Risinājumi</a>
+      <a href="nozares.html">Nozares</a>
+      <a href="par-mums.html">Par mums</a>
+      <button type="button" id="themeBtn" title="Mainīt gaišo/tumšo režīmu" aria-label="Mainīt gaišo/tumšo režīmu"></button>
+      <a class="btn btn-primary btn-sm nav-cta" href="kontakti.html">Sazināties</a>
+      <div class="menu" id="menuDropdown">
+        <button type="button" id="menuBtn" title="Izvēlne" aria-label="Izvēlne" aria-haspopup="true" aria-expanded="false" aria-controls="menuList">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        </button>
+        <div class="menu-list" id="menuList" hidden>
+          <a href="index.html">Sākums</a>
+          <a href="boti.html">Gatavie boti</a>
+          <a href="risinajumi.html" aria-current="page">Risinājumi</a>
+          <a href="nozares.html">Nozares</a>
+          <a href="par-mums.html">Par mums</a>
+          <a class="btn btn-primary" href="kontakti.html">Sazināties</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Risinājumi</span>
+      <h1>Ko varam automatizēt</h1>
+      <p class="lead">32 risinājumi četrās jomās. Pie katra norādīts, kam tas der, un vai tas ir gatavs produkts, strādā mūsu pašu uzņēmumos vai tiek veidots pēc pasūtījuma.</p>
+      <dl class="legend">
+        <div><dt><span class="status status-gatavs">Gatavs produkts</span></dt><dd>Fiksēta cena, uzstādām vienas dienas laikā.</dd></div>
+        <div><dt><span class="status status-lietojam">Strādā mūsu uzņēmumos</span></dt><dd>Ikdienā lietojam paši, pielāgojam jūsu procesam.</dd></div>
+        <div><dt><span class="status status-pasutijums">Pēc pasūtījuma</span></dt><dd>Izveidojam jūsu procesam, cena pēc apjoma.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <nav class="subnav" aria-label="Jomas">
+    <div class="wrap">
+      <a href="#dokumenti">Dokumenti un grāmatvedība</a><a href="#e-komercija">E-komercija</a><a href="#video">YouTube, Instagram un TikTok</a><a href="#ikdiena">Klienti, komanda un ikdiena</a>
+    </div>
+  </nav>
+
+  <section class="band" id="dokumenti">
+    <div class="wrap">
+      <div class="section-head"><h2 class="area-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 3v5h5M10 13h6M10 17h6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Dokumenti un grāmatvedība</h2><p class="lead">Rēķini, čeki, kases dati un atskaites grāmatvedim bez pārrakstīšanas.</p></div>
+      <div class="solutions">
+        <article class="solution" id="rekinu-bots">
+          <span class="status status-gatavs">Gatavs produkts</span>
+          <h3>Rēķinu bots</h3>
+          <p class="sol-for"><span>Kam der:</span> Jebkuram uzņēmumam, kas saņem rēķinus un čekus</p>
+          <p>Nofotografējiet čeku vai pārsūtiet PDF rēķinu Telegram. Bots nolasa datus, saglabā failu mēneša mapē un ieraksta reģistrā.</p>
+          <a class="link-more" href="boti.html#rekinu-bots">Cena un detaļas →</a>
+        </article>
+        <article class="solution" id="kases-zurnals">
+          <span class="status status-gatavs">Gatavs produkts</span>
+          <h3>Kases žurnāls</h3>
+          <p class="sol-for"><span>Kam der:</span> Kases aparātiem, kas Z pārskatu izdrukā tikai uz papīra</p>
+          <p>Z pārskata foto kļūst par rindu kases tabulā. Bots atgādina, ja kādai kasei pārskats trūkst.</p>
+          <a class="link-more" href="boti.html#kases-zurnals">Cena un detaļas →</a>
+        </article>
+        <article class="solution" id="bankas-izraksts">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Bankas izraksts pret rēķiniem</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem, kam mēneša beigās trūkst dokumentu</p>
+          <p>Salīdzina bankas maksājumus ar rēķinu reģistru un parāda, kuriem maksājumiem vēl trūkst dokumenta.</p>
+        </article>
+        <article class="solution" id="menesa-atskaites">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Mēneša atskaites grāmatvedim</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem ar ārpakalpojuma grāmatvedi</p>
+          <p>Rēķini, kases dati, darba laika tabula un kopsavilkums tiek sagatavoti, un grāmatvedim gaida gatava vēstule.</p>
+        </article>
+        <article class="solution" id="eveikalu-atskaites">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>E-veikalu atskaites un OSS</h3>
+          <p class="sol-for"><span>Kam der:</span> Tirgotājiem Etsy, Amazon un savā e-veikalā</p>
+          <p>Pārdošanas atskaite, platformu maksu pārskats un OSS deklarācijas dati katru mēnesi.</p>
+        </article>
+        <article class="solution" id="karsu-atskaites">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Karšu maksājumu atskaites</h3>
+          <p class="sol-for"><span>Kam der:</span> Tirgotājiem ar SumUp vai citu karšu termināli</p>
+          <p>Termināļa maksājumi mēneša atskaitē, sasaistīti ar kases datiem.</p>
+        </article>
+        <article class="solution" id="iesniegumi">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Iesniegumi un veidlapas</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem, kas regulāri pagarina atļaujas vai līgumus</p>
+          <p>Atkārtoti iesniegumi iestādēm, līgumi un pavadvēstules tiek aizpildīti uz jauno periodu. Jums atliek pārbaudīt un nosūtīt.</p>
+        </article>
+        <article class="solution" id="rekini-no-epasta">
+          <span class="status status-pasutijums">Pēc pasūtījuma</span>
+          <h3>Rēķini no e-pasta paši</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem, kas rēķinus saņem e-pastā</p>
+          <p>Rēķini no e-pasta uzreiz nonāk Drive mapē un tiek nolasīti, bez lejupielādes un pārsūtīšanas.</p>
+        </article>
+        <article class="solution" id="drive-pastkaste">
+          <span class="status status-pasutijums">Pēc pasūtījuma</span>
+          <h3>Drive mape kā pastkaste</h3>
+          <p class="sol-for"><span>Kam der:</span> Birojiem ar skeneri un grāmatvežiem</p>
+          <p>Iemetiet PDF vai skenējumu kopīgā mapē, un tas tiek apstrādāts un ierakstīts reģistrā.</p>
+        </article>
+        <article class="solution" id="termini">
+          <span class="status status-pasutijums">Pēc pasūtījuma</span>
+          <h3>Termiņi un atgādinājumi</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem ar atļaujām, licencēm un līgumiem</p>
+          <p>Atļauju, līgumu, apdrošināšanas un nodokļu termiņi vienuviet. Atgādinājums pienāk laikus.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tint" id="e-komercija">
+    <div class="wrap">
+      <div class="section-head"><h2 class="area-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 11h10.2L20 8H6.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="19.5" r="1.5" fill="currentColor"/><circle cx="17" cy="19.5" r="1.5" fill="currentColor"/></svg>E-komercija</h2><p class="lead">Pasūtījumi, cenas, atlikumi un sūtījumi vairākās platformās vienlaikus.</p></div>
+      <div class="solutions">
+        <article class="solution" id="pasutijumi">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Pasūtījumi un dropshipping</h3>
+          <p class="sol-for"><span>Kam der:</span> Tirgotājiem, kas preces sūta no piegādātāja</p>
+          <p>Jauns pasūtījums platformā tiek nodots piegādātājam, un izsūtīšanas numurs atgriežas pie pircēja.</p>
+        </article>
+        <article class="solution" id="cenas-atlikumi">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Cenas un atlikumi visās platformās</h3>
+          <p class="sol-for"><span>Kam der:</span> Tirgotājiem vairākās tirgus vietās</p>
+          <p>Viena cena un atlikums visur: jūsu e-veikalā, Etsy, Amazon vai eBay. Izmaiņa vienā vietā nonāk visās.</p>
+        </article>
+        <article class="solution" id="jauna-platforma">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Preces jaunā platformā</h3>
+          <p class="sol-for"><span>Kam der:</span> Tirgotājiem, kas grib pārdot vēl vienā vietā</p>
+          <p>Preces ar aprakstiem, bildēm un variantiem tiek pārnestas uz jaunu tirgus vietu bez pārrakstīšanas.</p>
+        </article>
+        <article class="solution" id="veikala-audits">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Veikala audits un SEO</h3>
+          <p class="sol-for"><span>Kam der:</span> Etsy un Amazon veikaliem, kam krīt skatījumi</p>
+          <p>Nosaukumi, atslēgvārdi, bildes, piegāde un cenas tiek pārbaudīti pēc platformas noteikumiem, un kļūdas izlabotas.</p>
+        </article>
+        <article class="solution" id="uzlimes">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Sūtījumu uzlīmes</h3>
+          <p class="sol-for"><span>Kam der:</span> Veikaliem ar daudziem sūtījumiem dienā</p>
+          <p>Uzlīmes un sūtījumi kurjeram tiek izveidoti no pasūtījumu sistēmas ar vienu komandu.</p>
+        </article>
+        <article class="solution" id="majaslapas">
+          <span class="status status-pasutijums">Pēc pasūtījuma</span>
+          <h3>Mājaslapas un e-veikali</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem bez lapas vai ar novecojušu lapu</p>
+          <p>Moderna, ātra lapa ar jūsu piedāvājumu, kontaktformu un savienojumu ar jūsu ikdienas rīkiem.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="video">
+    <div class="wrap">
+      <div class="section-head"><h2 class="area-title"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 9.2v5.6l4.8-2.8z" fill="currentColor"/></svg>YouTube, Instagram un TikTok</h2><p class="lead">Video satura ražošana, augšupielāde un tiešraides pēc grafika.</p></div>
+      <div class="solutions">
+        <article class="solution" id="shorts">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Shorts kanāls uz autopilota</h3>
+          <p class="sol-for"><span>Kam der:</span> Zīmoliem un uzņēmumiem, kas grib regulāru video saturu</p>
+          <p>Idejas, montāža, virsraksti, subtitri un augšupielāde pēc grafika. Jūs apstiprināt, pārējais notiek pats.</p>
+        </article>
+        <article class="solution" id="klipi">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Klipi Instagram un TikTok</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem ar gariem video vai pasākumu materiāliem</p>
+          <p>No jūsu video un materiāliem tiek sagatavoti vertikāli klipi ar subtitriem un jūsu zīmolu.</p>
+        </article>
+        <article class="solution" id="ai-balss">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Video ar AI balsi</h3>
+          <p class="sol-for"><span>Kam der:</span> Izglītojošam saturam, produktu stāstiem un apmācībām</p>
+          <p>Gari stāstījuma video ar ierunu, ilustrācijām un mūziku, sagatavoti pēc jūsu teksta vai tēmas.</p>
+        </article>
+        <article class="solution" id="datu-video">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Datu un statistikas video</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem un medijiem ar skaitļiem, ko izskaidrot</p>
+          <p>Jūsu dati kļūst par animētiem grafikiem un īsiem video.</p>
+        </article>
+        <article class="solution" id="tiesraides">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Automatizētas tiešraides</h3>
+          <p class="sol-for"><span>Kam der:</span> Kanāliem ar regulāriem notikumiem</p>
+          <p>Tiešraide ar dzīviem datiem sākas un beidzas pati pēc grafika, ar jūsu dizainu.</p>
+        </article>
+        <article class="solution" id="kanala-audits">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Kanāla audits un satura plāns</h3>
+          <p class="sol-for"><span>Kam der:</span> Kanāliem, kas grib augt</p>
+          <p>Konkurentu, tēmu un tendenču izpēte, un no tās satura kalendārs ar konkrētām video idejām.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tint" id="ikdiena">
+    <div class="wrap">
+      <div class="section-head"><h2 class="area-title"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.5 6a3 3 0 010 5.6M17.5 14.3c1.6.6 2.7 2.2 3 4.7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Klienti, komanda un ikdiena</h2><p class="lead">Rezervācijas, pieteikumi, grafiki, uzdevumi un brīdinājumi telefonā.</p></div>
+      <div class="solutions">
+        <article class="solution" id="rezervaciju-bots">
+          <span class="status status-gatavs">Gatavs produkts</span>
+          <h3>Rezervāciju bots</h3>
+          <p class="sol-for"><span>Kam der:</span> Īres dzīvokļu un viesu māju saimniekiem</p>
+          <p>Booking un Airbnb rezervācijas vienā kalendārā. Katru rītu apkopējām tīrīšanas plāns ar pogām.</p>
+          <a class="link-more" href="boti.html#rezervaciju-bots">Cena un detaļas →</a>
+        </article>
+        <article class="solution" id="darbinieku-ieeja">
+          <span class="status status-gatavs">Gatavs produkts</span>
+          <h3>Darbinieku ieeja</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem, kur dokumentus sūta darbinieki</p>
+          <p>Katram darbiniekam sava piekļuve botam, un jūs redzat, kurš ko nosūtīja.</p>
+          <a class="link-more" href="boti.html#darbinieku-ieeja">Cena un detaļas →</a>
+        </article>
+        <article class="solution" id="darba-grafiki">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Darba grafiki</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem ar maiņu darbu</p>
+          <p>Mēneša grafiks no darbinieku pieejamības, un katrs savu maiņu saņem telefonā.</p>
+        </article>
+        <article class="solution" id="uzdevumi">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Uzdevumi un pārbaudes</h3>
+          <p class="sol-for"><span>Kam der:</span> Tīrīšanai, inventarizācijai un ikdienas pārbaudēm</p>
+          <p>Uzdevumi ar atzīmēšanu telefonā un paziņojumu, ja kaut kas nav izdarīts.</p>
+        </article>
+        <article class="solution" id="uzraudziba">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Uzraudzība un brīdinājumi</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem, kuru veikals vai lapa nedrīkst apstāties</p>
+          <p>Ja veikals, kanāls, mājaslapa vai dators pārstāj strādāt, jūs to uzzināt uzreiz, nevis no klienta.</p>
+        </article>
+        <article class="solution" id="nedelas-parskats">
+          <span class="status status-lietojam">Strādā mūsu uzņēmumos</span>
+          <h3>Nedēļas pārskats telefonā</h3>
+          <p class="sol-for"><span>Kam der:</span> Īpašniekiem, kas grib redzēt skaitļus vienuviet</p>
+          <p>Pārdošana, skatījumi, pasūtījumi un problēmas vienā īsā ziņā katru pirmdienas rītu.</p>
+        </article>
+        <article class="solution" id="pieteikumi">
+          <span class="status status-pasutijums">Pēc pasūtījuma</span>
+          <h3>Pieteikumi no mājaslapas</h3>
+          <p class="sol-for"><span>Kam der:</span> Pakalpojumu uzņēmumiem ar pierakstiem</p>
+          <p>Formas, rezervācijas un pieprasījumi nonāk tabulā, un atbildīgais uzreiz saņem paziņojumu telefonā.</p>
+        </article>
+        <article class="solution" id="atbildes">
+          <span class="status status-pasutijums">Pēc pasūtījuma</span>
+          <h3>Atbildes klientiem</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem ar daudziem līdzīgiem jautājumiem</p>
+          <p>Mākslīgais intelekts sagatavo atbilžu melnrakstus uz biežākajiem e-pastiem un ziņām. Jūs pārbaudāt un nosūtāt.</p>
+        </article>
+        <article class="solution" id="darba-laiks">
+          <span class="status status-pasutijums">Pēc pasūtījuma</span>
+          <h3>Darba laika uzskaite</h3>
+          <p class="sol-for"><span>Kam der:</span> Uzņēmumiem ar stundu darbu</p>
+          <p>Darbinieki atzīmē sākumu un beigas telefonā, un mēneša beigās tabula grāmatvedim ir gatava.</p>
+        </article>
+        <article class="solution" id="jusu-process">
+          <span class="status status-pasutijums">Pēc pasūtījuma</span>
+          <h3>Jūsu process</h3>
+          <p class="sol-for"><span>Kam der:</span> Jebkuram darbam, kas atkārtojas</p>
+          <p>Pastāstiet, ko jūs darāt katru dienu, nedēļu vai mēneša beigās. Bieži to var automatizēt ātrāk un lētāk, nekā šķiet.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band cta-band">
+    <div class="wrap cta">
+      <div>
+        <h2>Neatradāt savu gadījumu?</h2>
+        <p class="lead">Pastāstiet, kuru darbu jūs atkārtojat katru dienu, nedēļu vai mēneša beigās. Pirmā saruna ir bez maksas.</p>
+      </div>
+      <a class="btn btn-primary" href="kontakti.html">Sazināties</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <strong>CLICKLESS</strong>
+      <p>Automatizācija mazajiem uzņēmumiem Latvijā.</p>
+      <p>© 2026 CLICKLESS · SIA "UNG STORE", reģ. Nr. 50203319651</p>
+    </div>
+    <nav aria-label="Lapas">
+      <span>Lapas</span>
+      <a href="boti.html">Gatavie boti</a>
+      <a href="risinajumi.html">Risinājumi</a>
+      <a href="nozares.html">Nozares</a>
+      <a href="par-mums.html">Par mums</a>
+      <a href="kontakti.html">Kontakti</a>
+    </nav>
+    <nav aria-label="Informācija">
+      <span>Informācija</span>
+      <a href="privatuma-politika.html">Privātuma politika</a>
+      <a href="noteikumi.html">Lietošanas noteikumi</a>
+      <a href="atsauksme.html">Atstāt atsauksmi</a>
+      <span class="select">info@clickless.lv</span>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // Gaišā/tumšā režīma poga — tās pašas ikonas un loģika kā pvnkalkulators.eu
+  (function () {
+    var themeBtn = document.getElementById('themeBtn');
+    if (!themeBtn) return;
+    var sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      '<circle cx="12" cy="12" r="5"></circle>' +
+      '<line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>' +
+      '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>' +
+      '<line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>' +
+      '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>' +
+      '</svg>';
+    var moonIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>' +
+      '</svg>';
+    function applyTheme(th) {
+      document.documentElement.setAttribute('data-theme', th);
+      var tcMeta = document.querySelector('meta[name="theme-color"]');
+      if (tcMeta) tcMeta.setAttribute('content', th === 'dark' ? '#0b0b0b' : '#ffffff');
+      themeBtn.innerHTML = th === 'dark' ? sunIcon : moonIcon;
+      try { localStorage.setItem('clickless-theme', th); } catch (e) {}
+    }
+    var savedTheme = null;
+    try { savedTheme = localStorage.getItem('clickless-theme'); } catch (e) {}
+    applyTheme(savedTheme || document.documentElement.getAttribute('data-theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+    themeBtn.addEventListener('click', function () {
+      applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+  })();
+</script>
+<script>
+  // Mobilā izvēlne (☰) — tā pati loģika kā pvnkalkulators.eu
+  (function () {
+    var dd = document.getElementById('menuDropdown'), btn = document.getElementById('menuBtn'), list = document.getElementById('menuList');
+    if (!dd) return;
+    function openMenu() { list.hidden = false; btn.setAttribute('aria-expanded', 'true'); }
+    function closeMenu() { list.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); list.hidden ? openMenu() : closeMenu(); });
+    document.addEventListener('click', function (e) { if (!dd.contains(e.target)) closeMenu(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeMenu(); btn.focus(); } });
+    list.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+    // Aizver, kad fokuss ar Tab aiziet ārpus izvēlnes
+    dd.addEventListener('focusout', function (e) { if (e.relatedTarget && !dd.contains(e.relatedTarget)) closeMenu(); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 760) closeMenu(); });
+  })();
+</script>
+</body>
+</html>

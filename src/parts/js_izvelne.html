@@ -1,0 +1,16 @@
+<script>
+  // Mobilā izvēlne (☰) — tā pati loģika kā pvnkalkulators.eu
+  (function () {
+    var dd = document.getElementById('menuDropdown'), btn = document.getElementById('menuBtn'), list = document.getElementById('menuList');
+    if (!dd) return;
+    function openMenu() { list.hidden = false; btn.setAttribute('aria-expanded', 'true'); }
+    function closeMenu() { list.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); list.hidden ? openMenu() : closeMenu(); });
+    document.addEventListener('click', function (e) { if (!dd.contains(e.target)) closeMenu(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeMenu(); btn.focus(); } });
+    list.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+    // Aizver, kad fokuss ar Tab aiziet ārpus izvēlnes
+    dd.addEventListener('focusout', function (e) { if (e.relatedTarget && !dd.contains(e.relatedTarget)) closeMenu(); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 760) closeMenu(); });
+  })();
+</script>
