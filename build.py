@@ -294,6 +294,12 @@ def lidu_karte():
     io.open(os.path.join('..', 'lidu-karte.md'), 'w', encoding='utf-8', newline='\n').write('\n'.join(o))
 
 
+def tiras_saites(html):
+    # GitHub Pages atver /par-mums tāpat kā /par-mums.html, tāpēc saitēs .html nerādām
+    html = re.sub(r'href="index\.html(#[^"]*)?"', lambda m: 'href="/%s"' % (m.group(1) or ''), html)
+    return re.sub(r'href="([a-z0-9-]+)\.html(#[^"]*)?"', lambda m: 'href="/%s%s"' % (m.group(1), m.group(2) or ''), html)
+
+
 def main():
     lapas = {f: io.open('src/pages/' + f, encoding='utf-8').read() for f in os.listdir('src/pages') if f.endswith('.html')}
     lapas['risinajumi.html'] = lapa_risinajumi()
@@ -306,7 +312,7 @@ def main():
     for f, s in lapas.items():
         if not s.startswith('<!--meta') and f in meta_noklusejums:
             s = '<!--meta\n%s\n-->\n' % meta_noklusejums[f] + s
-        io.open(f, 'w', encoding='utf-8', newline='\n').write(izkartot(s, f))
+        io.open(f, 'w', encoding='utf-8', newline='\n').write(tiras_saites(izkartot(s, f)))
     lidu_karte()
     print('Uzbūvētas lapas:', ', '.join(sorted(lapas)))
 

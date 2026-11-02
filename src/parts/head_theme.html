@@ -8,5 +8,10 @@
     document.documentElement.setAttribute('data-theme', t);
     var m = document.querySelector('meta[name="theme-color"]');
     if (m) m.setAttribute('content', t === 'dark' ? '#0b0b0b' : '#ffffff');
+    // Vecās saites ar .html adreses joslā rāda bez tā
+    var p = location.pathname;
+    if (location.protocol !== 'file:' && /\.html$/.test(p) && history.replaceState) {
+      history.replaceState(null, '', p.replace(/(index)?\.html$/, '') + location.search + location.hash);
+    }
   })();
 </script>
