@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="lv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Savieno Google Drive – Clickless</title>
+<style>
+  body { margin: 0; font: 400 1.05rem/1.5 system-ui, "Segoe UI", sans-serif; background: #ffffff; color: #111111; }
+  main { max-width: 28rem; margin: 15vh auto; padding: 0 16px; }
+  b { color: #111111; background: #00f0d0; padding: 0 .15em; border-radius: 3px; }
+  p { color: #5a6362; }
+  @media (prefers-color-scheme: dark) { body { background: #0b0b0b; color: #ffffff; } p { color: #a2abaa; } b { color: #00f0d0; background: none; padding: 0; } }
+</style>
+</head>
+<body>
+<main>
+  <div><strong>click<b>less</b></strong></div>
+  <h1>Savienoju jūsu Google Drive…</h1>
+  <p id="teksts">Pēc mirkļa jūs pāradresēs. Ja nekas nenotiek, atgriezieties Telegram un nospiediet pogu “Atļaut Google Drive” vēlreiz.</p>
+</main>
+<script>
+  // Google atļaujas atbildi (code, state) nodod Clickless bota serverim. Saturs šeit netiek saglabāts.
+  var BOTS = "https://script.google.com/macros/s/AKfycbysYndg4WJhmcw0sKghLravu32CRFtudSaivJSiocAQL46tj69U71UzQ5UgRq22k68LFQ/exec";
+  var q = window.location.search;
+  if (/[?&]state=/.test(q)) window.location.replace(BOTS + q);
+  else document.getElementById("teksts").textContent = "Šī lapa tiek atvērta automātiski pēc Google atļaujas piešķiršanas.";
+</script>
+</body>
+</html>
