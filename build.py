@@ -7,7 +7,7 @@ Rezultāts: *.html saknes mapē (tos publicē GitHub Pages) un ../lidu-karte.md 
 Lapā var lietot:  {{part:nosaukums}}  un  {{gen:generators}}.
 risinajumi.html un nozares.html tiek ģenerētas pilnībā no datiem.
 """
-import io, json, os, re, html, sys
+import hashlib, io, json, os, re, html, sys
 
 try:
     sys.stdout.reconfigure(encoding='utf-8')   # Windows konsole citādi nevar izdrukāt ā, ū
@@ -214,7 +214,7 @@ def izkartot(saturs, fails):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Commissioner:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=%(css_v)s">
 </head>
 <body>
 
@@ -272,6 +272,7 @@ def izkartot(saturs, fails):
 </body>
 </html>
 ''' % {'title': e(meta.get('title', 'CLICKLESS')), 'desc': e(meta.get('description', '')), 'robots': robots,
+       'css_v': hashlib.md5(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'style.css'), 'rb').read()).hexdigest()[:8],
        'tema_head': part('head_theme').strip(), 'logo': part('logo.svg'), 'nav': nav, 'menu': menu,
        'cta_cur': ' aria-current="page"' if akt == 'kontakti' else '',
        'saturs': saturs.strip('\n'), 'js': part('js_tema') + '\n' + part('js_izvelne')}
