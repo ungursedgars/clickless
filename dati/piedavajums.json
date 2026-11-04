@@ -1,5 +1,5 @@
 {
-  "_apraksts": "Clickless piedāvājums vienuviet. No šī faila build.py ģenerē lapas risinajumi.html, nozares.html un boti.html daļas. Lauki 'agentiem' netiek rādīti lapā: tie paredzēti līdu meklēšanai (kuram uzņēmumam ko piedāvāt).",
+  "_apraksts": "CLICKLESS piedāvājums vienuviet. No šī faila build.py ģenerē lapas risinajumi.html, nozares.html un boti.html daļas. Lauki 'agentiem' netiek rādīti lapā: tie paredzēti līdu meklēšanai (kuram uzņēmumam ko piedāvāt).",
 
   "statusi": {
     "gatavs": {"nosaukums": "Gatavs produkts", "apraksts": "Fiksēta cena, uzstādām vienas dienas laikā."},

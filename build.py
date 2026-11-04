@@ -1,4 +1,4 @@
-"""Clickless mājaslapas būvētājs.
+"""CLICKLESS mājaslapas būvētājs.
 
 Lapas glabājas src/pages/*.html (saturs bez galvenes un kājenes), kopīgās daļas
 src/parts/*.html, piedāvājums dati/piedavajums.json. Palaiž:  python build.py
@@ -106,7 +106,7 @@ def gen_pakas():
     o.append('          <a class="link-more" href="risinajumi.html">Visi risinājumi →</a>')
     o.append('        </article>')
     o.append('      </div>')
-    o.append('      <p class="price-note">Mēneša maksā iekļauti līdz 500 nolasītiem dokumentiem. Ja mēnesī to ir vairāk, katri nākamie 500 maksā 5 €. Līgumu var izbeigt ar viena mēneša brīdinājumu. Cenas norādītas bez PVN (21%).</p>')
+    o.append('      <p class="price-note"><strong>Pirmais mēnesis bez maksas:</strong> nekas nav jāparaksta, un karte nav vajadzīga. Uzstādīšanas un mēneša maksa sākas tikai tad, ja izlemjat turpināt. Mēneša maksā iekļauti līdz 500 nolasītiem dokumentiem. Ja mēnesī to ir vairāk, katri nākamie 500 maksā 5 €. Līgumu var izbeigt ar viena mēneša brīdinājumu. Cenas norādītas bez PVN (21%).</p>')
     return '\n'.join(o)
 
 
@@ -128,8 +128,8 @@ GEN = {'jomas': gen_jomas, 'pakas_isi': gen_pakas_isi, 'nozares_saites': gen_noz
 
 # ---------------------------------------------------------------- pilnīgi ģenerētās lapas
 def lapa_risinajumi():
-    o = ['<!--meta', 'title: Risinājumi – Clickless',
-         'description: Ko Clickless var automatizēt: dokumenti un grāmatvedība, e-komercija, YouTube un sociālie tīkli, klienti un komanda.',
+    o = ['<!--meta', 'title: Risinājumi – CLICKLESS',
+         'description: Ko CLICKLESS var automatizēt: dokumenti un grāmatvedība, e-komercija, YouTube un sociālie tīkli, klienti un komanda.',
          'nav: risinajumi', '-->', '<main>',
          '  <section class="page-hero">', '    <div class="wrap">',
          '      <span class="eyebrow">Risinājumi</span>',
@@ -162,8 +162,8 @@ def lapa_risinajumi():
 
 
 def lapa_nozares():
-    o = ['<!--meta', 'title: Nozares – Clickless',
-         'description: Clickless risinājumi pēc nozares: ēdināšana, tirdzniecība, īres dzīvokļi, e-veikali, pakalpojumi, būvniecība, grāmatveži un satura veidotāji.',
+    o = ['<!--meta', 'title: Nozares – CLICKLESS',
+         'description: CLICKLESS risinājumi pēc nozares: ēdināšana, tirdzniecība, īres dzīvokļi, e-veikali, pakalpojumi, būvniecība, grāmatveži un satura veidotāji.',
          'nav: nozares', '-->', '<main>',
          '  <section class="page-hero">', '    <div class="wrap">',
          '      <span class="eyebrow">Nozares</span>',
@@ -220,7 +220,7 @@ def izkartot(saturs, fails):
 
 <header class="site-header">
   <div class="wrap">
-    <a class="logo" href="index.html" aria-label="Clickless sākums">
+    <a class="logo" href="index.html" aria-label="CLICKLESS sākums">
       %(logo)s
     </a>
     <nav class="nav" aria-label="Galvenā navigācija">
@@ -271,14 +271,14 @@ def izkartot(saturs, fails):
 %(js)s
 </body>
 </html>
-''' % {'title': e(meta.get('title', 'Clickless')), 'desc': e(meta.get('description', '')), 'robots': robots,
+''' % {'title': e(meta.get('title', 'CLICKLESS')), 'desc': e(meta.get('description', '')), 'robots': robots,
        'tema_head': part('head_theme').strip(), 'logo': part('logo.svg'), 'nav': nav, 'menu': menu,
        'cta_cur': ' aria-current="page"' if akt == 'kontakti' else '',
        'saturs': saturs.strip('\n'), 'js': part('js_tema') + '\n' + part('js_izvelne')}
 
 
 def lidu_karte():
-    o = ['# Clickless līdu karte', '',
+    o = ['# CLICKLESS līdu karte', '',
          'Ģenerēts no `clickless-web/dati/piedavajums.json` ar `python clickless-web/build.py`. Nelabot ar roku.', '',
          'Katrai nozarei: kā atrast uzņēmumus (NACE, atslēgvārdi), ko piedāvāt un pirmais teikums uzrunai.', '']
     for n in D['nozares']:
@@ -305,9 +305,9 @@ def main():
     lapas['risinajumi.html'] = lapa_risinajumi()
     lapas['nozares.html'] = lapa_nozares()
     meta_noklusejums = {
-        'privatuma-politika.html': 'title: Clickless privātuma politika\ndescription: Kā Clickless apstrādā personas datus un klientu dokumentus.\nnav: -',
-        'noteikumi.html': 'title: Clickless lietošanas noteikumi\ndescription: Clickless pakalpojumu lietošanas noteikumi.\nnav: -',
-        'atsauksme.html': 'title: Clickless atsauksme\ndescription: Atsauksme par Clickless pakalpojumu.\nnav: -\nrobots: noindex',
+        'privatuma-politika.html': 'title: CLICKLESS privātuma politika\ndescription: Kā CLICKLESS apstrādā personas datus un klientu dokumentus.\nnav: -',
+        'noteikumi.html': 'title: CLICKLESS lietošanas noteikumi\ndescription: CLICKLESS pakalpojumu lietošanas noteikumi.\nnav: -',
+        'atsauksme.html': 'title: CLICKLESS atsauksme\ndescription: Atsauksme par CLICKLESS pakalpojumu.\nnav: -\nrobots: noindex',
     }
     for f, s in lapas.items():
         if not s.startswith('<!--meta') and f in meta_noklusejums:
