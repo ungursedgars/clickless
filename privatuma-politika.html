@@ -9,6 +9,11 @@
 <link rel="alternate" hreflang="lv" href="https://clickless.lv/privatuma-politika">
 <link rel="alternate" hreflang="en" href="https://clickless.lv/en/privatuma-politika">
 <link rel="alternate" hreflang="x-default" href="https://clickless.lv/privatuma-politika">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+</script>
 <meta name="theme-color" content="#ffffff">
 <script>
   // Uzliek tēmu vēl pirms lapas zīmēšanas, lai tumšajā režīmā nav balta zibšņa (kā pvnkalkulators.eu)
@@ -30,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Commissioner:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="/style.css?v=37ad3ca4">
+<link rel="stylesheet" href="/style.css?v=0987507b">
 </head>
 <body>
 
@@ -69,7 +74,7 @@
     <header>
       <span class="eyebrow">Juridiskā informācija</span>
       <h1>Privātuma politika</h1>
-      <p>Spēkā no <span class="mono">01.11.2026</span>. Šī politika paskaidro, kādus datus apstrādājam, kāpēc un kā jūs varat tos kontrolēt.</p>
+      <p>Spēkā no <span class="mono">12.11.2026</span>. Šī politika paskaidro, kādus datus apstrādājam, kāpēc un kā jūs varat tos kontrolēt.</p>
     </header>
 
     <h2>1. Kas mēs esam</h2>
@@ -94,6 +99,8 @@
           <tr><td>Telegram lietotāja ID un vārds</td><td>Atpazīt, kuram klientam pieder čats ar botu</td><td>Līguma izpilde (6.1.b)</td><td>Līdz līguma beigām</td></tr>
           <tr><td>Klienta dokumenti (rēķini, čeki, Z pārskati)</td><td>Nolasīt datus un saglabāt klienta Google Drive</td><td>Klienta norādījumi saskaņā ar datu apstrādes līgumu</td><td>Mēs tos neglabājam (skatīt 4. punktu)</td></tr>
           <tr><td>Google piekļuves atļauja (OAuth marķieris)</td><td>Ļaut botam saglabāt failus klienta Google Drive</td><td>Līguma izpilde (6.1.b)</td><td>Līdz piekļuves atsaukšanai vai līguma beigām</td></tr>
+          <tr><td>Vietnes apmeklējuma dati (Google Analytics)</td><td>Apmeklējumu statistika</td><td>Piekrišana (6.1.a)</td><td>Līdz 14 mēnešiem Google Analytics</td></tr>
+          <tr><td>Vietnes apmeklējuma dati (Meta Pixel)</td><td>Reklāmu rezultātu mērīšana un reklāmas vietnes apmeklētājiem</td><td>Piekrišana (6.1.a)</td><td>Saskaņā ar Meta noteikumiem</td></tr>
           <tr><td>Tehniskie žurnāli</td><td>Kļūdu atrašana un drošība</td><td>Leģitīmās intereses (6.1.f)</td><td>90 dienas, bez dokumentu satura</td></tr>
         </tbody>
       </table>
@@ -120,6 +127,8 @@
         <tbody>
           <tr><td>Google Ireland Ltd. (Google Workspace, Apps Script, Gemini API)</td><td>Bota darbība, dokumentu nolasīšana, klienta failu glabāšana</td><td>ES, ar iespējamu nosūtīšanu uz ASV</td></tr>
           <tr><td>Web3Forms (kontaktforma)</td><td>Kontaktformas ziņas nosūtīšana uz mūsu e-pastu</td><td>Ārpus EEZ</td></tr>
+          <tr><td>Google Ireland Ltd. (Google Analytics), tikai ar piekrišanu</td><td>Vietnes apmeklējumu statistika</td><td>ES, ar iespējamu nosūtīšanu uz ASV</td></tr>
+          <tr><td>Meta Platforms Ireland Ltd. (Meta Pixel), tikai ar piekrišanu</td><td>Reklāmu mērīšana Facebook un Instagram</td><td>ES, ar iespējamu nosūtīšanu uz ASV</td></tr>
           <tr><td>Telegram FZ-LLC</td><td>Ziņu un failu nosūtīšana starp lietotāju un botu</td><td>Ārpus EEZ</td></tr>
         </tbody>
       </table>
@@ -140,8 +149,15 @@
     <p>Ja uzskatāt, ka jūsu dati tiek apstrādāti nelikumīgi, varat iesniegt sūdzību Datu valsts inspekcijā, <a href="https://www.dvi.gov.lv">www.dvi.gov.lv</a>.</p>
     <p>Ja esat klienta darbinieks vai cita persona, kuras dati ir klienta dokumentos, vispirms vērsieties pie klienta, jo šo datu pārzinis ir viņš.</p>
 
-    <h2>9. Sīkdatnes</h2>
-    <p>Mājaslapa clickless.lv neizmanto sīkdatnes un apmeklējumu analītiku. Fonti tiek ielādēti no Google Fonts.</p>
+    <h2 id="sikdatnes">9. Sīkdatnes</h2>
+    <p>Vietne clickless.lv izmanto šādas sīkdatnes un līdzīgas tehnoloģijas:</p>
+    <ul>
+      <li><strong>Nepieciešamās.</strong> Jūsu pārlūkā (localStorage) glabājam gaišā/tumšā režīma izvēli un jūsu sīkdatņu izvēli. Tās vajadzīgas vietnes darbībai, un piekrišana tām nav nepieciešama.</li>
+      <li><strong>Analītikas</strong> (Google Analytics, Google Ireland Ltd.): cik apmeklētāju ir vietnē un kuras lapas viņi lasa. Tikai ar jūsu piekrišanu.</li>
+      <li><strong>Mārketinga</strong> (Meta Pixel, Meta Platforms Ireland Ltd.): mūsu reklāmu rezultātu mērīšana un reklāmu rādīšana Facebook un Instagram cilvēkiem, kas apmeklējuši vietni. Tikai ar jūsu piekrišanu.</li>
+    </ul>
+    <p>Kamēr neesat devuši piekrišanu, analītikas un mārketinga rīki netiek ielādēti. Piekrišanas pamats ir Informācijas sabiedrības pakalpojumu likuma 7.<sup>1</sup> pants un VDAR 6. panta 1. punkta a) apakšpunkts. Atteikties ir tikpat vienkārši kā piekrist, un izvēli varat mainīt jebkurā brīdī: <a href="#sikdatnes">Sīkdatņu iestatījumi</a>. Izvēli jautāsim atkārtoti pēc 12 mēnešiem.</p>
+    <p>Fonti tiek ielādēti no Google Fonts.</p>
 
     <h2>10. Izmaiņas</h2>
     <p>Par būtiskām izmaiņām šajā politikā klientiem paziņosim e-pastā vismaz 14 dienas iepriekš. Aktuālā versija vienmēr ir pieejama šajā lapā.</p>
@@ -168,11 +184,112 @@
       <a href="/privatuma-politika">Privātuma politika</a>
       <a href="/noteikumi">Lietošanas noteikumi</a>
       <a href="/atsauksme">Atstāt atsauksmi</a>
+      <a href="#sikdatnes">Sīkdatņu iestatījumi</a>
       <span class="select">info@clickless.lv</span>
     </nav>
   </div>
 </footer>
 
+<div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Sīkdatņu piekrišana">
+  <div class="cookie-inner">
+    <div class="cookie-text"><strong class="cookie-title">Sīkdatnes</strong> Nepieciešamās sīkdatnes vietnes darbībai izmantojam vienmēr. Analītikas un mārketinga sīkdatnes (Google Analytics, Meta Pixel) ielādējam tikai ar jūsu piekrišanu. <a href="/privatuma-politika#sikdatnes" data-uz-politiku>Uzzināt vairāk</a></div>
+    <div class="cookie-actions"><button id="cookieReject" type="button">Noraidīt</button><button id="cookieSettingsBtn" type="button">Iestatījumi</button><button id="cookieAccept" type="button">Piekrītu visām</button></div>
+  </div>
+</div>
+<div id="cookiePrefs" role="dialog" aria-modal="true" aria-labelledby="prefsTitle">
+  <div class="prefs-card">
+    <div class="prefs-head"><h2 id="prefsTitle">Sīkdatņu iestatījumi</h2><button id="prefsClose" type="button" aria-label="Aizvērt">✕</button></div>
+    <div class="prefs-top-actions"><button id="prefsRejectAll" type="button">Noraidīt visas</button><button id="prefsAcceptAll" type="button">Pieņemt visas</button></div>
+    <p class="prefs-intro">Nepieciešamās sīkdatnes nevar atslēgt, jo tās glabā tikai jūsu iestatījumus. Pārējās tiek ielādētas tikai ar jūsu piekrišanu, un izvēli varat mainīt jebkurā brīdī.</p>
+    <div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name">Nepieciešamās</span><span class="prefs-always">Vienmēr ieslēgtas</span></div><p class="prefs-cat-desc">Gaišā/tumšā režīma un jūsu sīkdatņu izvēles iestatījumi. Glabājas tikai jūsu pārlūkā.</p></div>
+    <div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="swAnalyticsNos">Analītikas</span><button type="button" class="switch" id="swAnalytics" role="switch" aria-checked="false" aria-labelledby="swAnalyticsNos"><span class="knob"></span></button></div><p class="prefs-cat-desc">Google Analytics palīdz saprast, cik apmeklētāju ir vietnē un kuras lapas viņi lasa.</p></div>
+    <div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="swMarketingNos">Mārketinga</span><button type="button" class="switch" id="swMarketing" role="switch" aria-checked="false" aria-labelledby="swMarketingNos"><span class="knob"></span></button></div><p class="prefs-cat-desc">Meta Pixel (Facebook un Instagram) ļauj mērīt mūsu reklāmu rezultātus un rādīt reklāmas cilvēkiem, kas apmeklējuši vietni.</p></div>
+    <button id="prefsSave" type="button">Saglabāt izvēli</button>
+  </div>
+</div>
+<script>
+  // Sīkdatņu piekrišana (pēc pvnkalkulators.eu parauga). Analītika un mārketings tiek ielādēti
+  // tikai pēc piekrišanas; izvēle glabājas localStorage, jautājam atkārtoti pēc 12 mēnešiem.
+  // ID ievieto build.py (SIKDATNES). Tukšs ID: rīks netiek ielādēts vispār.
+  (function () {
+    var GA4 = '', PIXEL = '', KEY = 'clickless-consent-v1', DERIGS_MS = 365 * 864e5;
+    var $ = function (id) { return document.getElementById(id); };
+    var banner = $('cookieBanner'), prefs = $('cookiePrefs'), swA = $('swAnalytics'), swM = $('swMarketing');
+    if (!banner || !prefs) return;
+    var gaLoaded = false, pixelLoaded = false;
+
+    function loadScript(src) { var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); }
+    function loadPixel() {
+      /* Meta Pixel standarta kods */
+      !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v;
+        s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s); }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('init', PIXEL);
+      window.fbq('track', 'PageView');
+    }
+    function apply(c) {
+      window.gtag('consent', 'update', {
+        analytics_storage: c.analytics ? 'granted' : 'denied',
+        ad_storage: c.marketing ? 'granted' : 'denied', ad_user_data: c.marketing ? 'granted' : 'denied', ad_personalization: c.marketing ? 'granted' : 'denied'
+      });
+      if (c.analytics && GA4 && !gaLoaded) {
+        gaLoaded = true;
+        loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA4);
+        window.gtag('js', new Date());
+        window.gtag('config', GA4);
+      }
+      if (c.marketing && PIXEL && !pixelLoaded) { pixelLoaded = true; loadPixel(); }
+      if (!c.marketing && pixelLoaded && window.fbq) window.fbq('consent', 'revoke');
+      if (c.marketing && pixelLoaded && window.fbq) window.fbq('consent', 'grant');
+    }
+    function read() {
+      try {
+        var c = JSON.parse(localStorage.getItem(KEY) || 'null');
+        if (c && Date.now() - (c.laiks || 0) < DERIGS_MS) return c;
+      } catch (e) {}
+      return null;
+    }
+    function save(c) { c.laiks = Date.now(); try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {} }
+
+    function setSw(sw, on) { sw.setAttribute('aria-checked', String(!!on)); }
+    function getSw(sw) { return sw.getAttribute('aria-checked') === 'true'; }
+    [swA, swM].forEach(function (sw) { sw.addEventListener('click', function () { setSw(sw, !getSw(sw)); }); });
+
+    function openPrefs() {
+      var c = read() || { analytics: false, marketing: false };
+      setSw(swA, c.analytics); setSw(swM, c.marketing);
+      prefs.classList.add('show');
+      $('prefsClose').focus();
+    }
+    function closePrefs(returnFocus) {
+      prefs.classList.remove('show');
+      if (returnFocus && banner.classList.contains('show')) $('cookieSettingsBtn').focus();
+    }
+    function finish(c) { save(c); apply(c); closePrefs(false); banner.classList.remove('show'); }
+
+    $('cookieAccept').addEventListener('click', function () { finish({ analytics: true, marketing: true }); });
+    $('cookieReject').addEventListener('click', function () { finish({ analytics: false, marketing: false }); });
+    $('cookieSettingsBtn').addEventListener('click', openPrefs);
+    $('prefsClose').addEventListener('click', function () { closePrefs(true); });
+    $('prefsRejectAll').addEventListener('click', function () { finish({ analytics: false, marketing: false }); });
+    $('prefsAcceptAll').addEventListener('click', function () { finish({ analytics: true, marketing: true }); });
+    $('prefsSave').addEventListener('click', function () { finish({ analytics: getSw(swA), marketing: getSw(swM) }); });
+    prefs.addEventListener('click', function (e) { if (e.target === prefs) closePrefs(true); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && prefs.classList.contains('show')) closePrefs(true); });
+
+    // Saite "#sikdatnes" (kājenē, privātuma politikā) atver iestatījumus jebkurā brīdī.
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[href$="#sikdatnes"]') : null;
+      if (!a || a.getAttribute('data-uz-politiku') !== null) return;
+      e.preventDefault(); openPrefs();
+    });
+
+    var c = read();
+    if (c) apply(c); else banner.classList.add('show');
+    if (location.hash === '#sikdatnes' && !document.getElementById('sikdatnes')) openPrefs();
+    window.clicklessCookies = openPrefs;
+  })();
+</script>
 <script>
   // Gaišā/tumšā režīma poga — tās pašas ikonas un loģika kā pvnkalkulators.eu
   (function () {

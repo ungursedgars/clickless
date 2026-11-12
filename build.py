@@ -92,6 +92,69 @@ T_ALL = {
     },
 }
 
+# Sīkdatņu rīki. Tukšs ID nozīmē, ka rīks netiek ielādēts vispār (arī pēc piekrišanas).
+# Meta Pixel ID: Meta Events Manager → Data sources. GA4: Google Analytics → Admin → Data streams (G-...).
+SIKDATNES = {'ga4': '', 'meta_pixel': ''}
+
+T_ALL['lv'].update({
+    'sik_aria': 'Sīkdatņu piekrišana', 'sik_virsraksts': 'Sīkdatnes',
+    'sik_teksts': 'Nepieciešamās sīkdatnes vietnes darbībai izmantojam vienmēr. Analītikas un mārketinga sīkdatnes (Google Analytics, Meta Pixel) ielādējam tikai ar jūsu piekrišanu. <a href="privatuma-politika.html#sikdatnes" data-uz-politiku>Uzzināt vairāk</a>',
+    'sik_noraidit': 'Noraidīt', 'sik_iestatijumi': 'Iestatījumi', 'sik_pienemt': 'Piekrītu visām',
+    'sik_logs': 'Sīkdatņu iestatījumi', 'sik_aizvert': 'Aizvērt',
+    'sik_noraidit_visas': 'Noraidīt visas', 'sik_pienemt_visas': 'Pieņemt visas',
+    'sik_ievads': 'Nepieciešamās sīkdatnes nevar atslēgt, jo tās glabā tikai jūsu iestatījumus. Pārējās tiek ielādētas tikai ar jūsu piekrišanu, un izvēli varat mainīt jebkurā brīdī.',
+    'sik_nep': 'Nepieciešamās', 'sik_vienmer': 'Vienmēr ieslēgtas',
+    'sik_nep_apr': 'Gaišā/tumšā režīma un jūsu sīkdatņu izvēles iestatījumi. Glabājas tikai jūsu pārlūkā.',
+    'sik_anal': 'Analītikas', 'sik_anal_apr': 'Google Analytics palīdz saprast, cik apmeklētāju ir vietnē un kuras lapas viņi lasa.',
+    'sik_mark': 'Mārketinga', 'sik_mark_apr': 'Meta Pixel (Facebook un Instagram) ļauj mērīt mūsu reklāmu rezultātus un rādīt reklāmas cilvēkiem, kas apmeklējuši vietni.',
+    'sik_saglabat': 'Saglabāt izvēli', 'sik_kajene': 'Sīkdatņu iestatījumi',
+})
+T_ALL['en'].update({
+    'sik_aria': 'Cookie consent', 'sik_virsraksts': 'Cookies',
+    'sik_teksts': 'We always use the cookies the site needs to work. Analytics and marketing cookies (Google Analytics, Meta Pixel) are loaded only with your consent. <a href="privatuma-politika.html#sikdatnes" data-uz-politiku>Learn more</a>',
+    'sik_noraidit': 'Reject', 'sik_iestatijumi': 'Settings', 'sik_pienemt': 'Accept all',
+    'sik_logs': 'Cookie settings', 'sik_aizvert': 'Close',
+    'sik_noraidit_visas': 'Reject all', 'sik_pienemt_visas': 'Accept all',
+    'sik_ievads': 'Necessary cookies cannot be switched off, as they only store your settings. The others are loaded only with your consent, and you can change your choice at any time.',
+    'sik_nep': 'Necessary', 'sik_vienmer': 'Always on',
+    'sik_nep_apr': 'Light/dark mode and your cookie choice. Stored only in your browser.',
+    'sik_anal': 'Analytics', 'sik_anal_apr': 'Google Analytics helps us understand how many people visit the site and which pages they read.',
+    'sik_mark': 'Marketing', 'sik_mark_apr': 'Meta Pixel (Facebook and Instagram) lets us measure our ads and show ads to people who have visited the site.',
+    'sik_saglabat': 'Save choice', 'sik_kajene': 'Cookie settings',
+})
+
+# Google Consent Mode v2: noklusējums "viss liegts" pirms jebkura Google vai Meta skripta.
+SIK_HEAD = '''<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+</script>'''
+
+
+def sikdatnes_html():
+    """Josla, iestatījumu logs un loģika (pēc pvnkalkulators.eu parauga, ar "Noraidīt" jau pirmajā līmenī)."""
+    s = {k: T[k] for k in T if k.startswith('sik_')}
+    sw = lambda i, n: '<button type="button" class="switch" id="%s" role="switch" aria-checked="false" aria-labelledby="%sNos"><span class="knob"></span></button>' % (i, i)
+    return '''<div id="cookieBanner" role="dialog" aria-live="polite" aria-label="%(sik_aria)s">
+  <div class="cookie-inner">
+    <div class="cookie-text"><strong class="cookie-title">%(sik_virsraksts)s</strong> %(sik_teksts)s</div>
+    <div class="cookie-actions"><button id="cookieReject" type="button">%(sik_noraidit)s</button><button id="cookieSettingsBtn" type="button">%(sik_iestatijumi)s</button><button id="cookieAccept" type="button">%(sik_pienemt)s</button></div>
+  </div>
+</div>
+<div id="cookiePrefs" role="dialog" aria-modal="true" aria-labelledby="prefsTitle">
+  <div class="prefs-card">
+    <div class="prefs-head"><h2 id="prefsTitle">%(sik_logs)s</h2><button id="prefsClose" type="button" aria-label="%(sik_aizvert)s">✕</button></div>
+    <div class="prefs-top-actions"><button id="prefsRejectAll" type="button">%(sik_noraidit_visas)s</button><button id="prefsAcceptAll" type="button">%(sik_pienemt_visas)s</button></div>
+    <p class="prefs-intro">%(sik_ievads)s</p>
+    <div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name">%(sik_nep)s</span><span class="prefs-always">%(sik_vienmer)s</span></div><p class="prefs-cat-desc">%(sik_nep_apr)s</p></div>
+    <div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="swAnalyticsNos">%(sik_anal)s</span>%(sw_a)s</div><p class="prefs-cat-desc">%(sik_anal_apr)s</p></div>
+    <div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="swMarketingNos">%(sik_mark)s</span>%(sw_m)s</div><p class="prefs-cat-desc">%(sik_mark_apr)s</p></div>
+    <button id="prefsSave" type="button">%(sik_saglabat)s</button>
+  </div>
+</div>
+''' % dict(s, sw_a=sw('swAnalytics', ''), sw_m=sw('swMarketing', '')) + part('js_sikdatnes').replace('__GA4__', SIKDATNES['ga4']).replace('__PIXEL__', SIKDATNES['meta_pixel'])
+
+
 # Pašreizējā valoda: uzstāda iestatit_valodu().
 VAL = 'lv'
 T = T_ALL['lv']
@@ -324,6 +387,7 @@ def izkartot(saturs, fails, ir_otra_valoda):
 <title>%(title)s</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="%(desc)s">%(robots)s%(alternate)s
+%(sik_head)s
 %(tema_head)s
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -375,11 +439,13 @@ def izkartot(saturs, fails, ir_otra_valoda):
       <span>%(informacija)s</span>
       <a href="privatuma-politika.html">%(privatums)s</a>
       <a href="noteikumi.html">%(noteikumi)s</a>%(atsauksme)s
+      <a href="#sikdatnes">%(sik_kajene)s</a>
       <span class="select">info@clickless.lv</span>
     </nav>
   </div>
 </footer>
 
+%(sikdatnes)s
 %(js)s
 </body>
 </html>
@@ -388,7 +454,7 @@ def izkartot(saturs, fails, ir_otra_valoda):
        'css_v': hashlib.md5(open(os.path.join(SAKNE, 'style.css'), 'rb').read()).hexdigest()[:8],
        'tema_head': part('head_theme').strip(), 'logo': part('logo.svg'), 'nav': nav, 'menu': menu,
        'cta_cur': ' aria-current="page"' if akt == 'kontakti' else '',
-       'valodas_saite': valodas_saite,
+       'valodas_saite': valodas_saite, 'sik_head': SIK_HEAD, 'sikdatnes': sikdatnes_html(), 'sik_kajene': T['sik_kajene'],
        'kajene_nav': '\n'.join('      <a href="%s">%s</a>' % (h, t) for h, t, k in T['nav']),
        'atsauksme': atsauksme,
        'saturs': saturs.strip('\n'), 'js': part('js_tema') + '\n' + part('js_izvelne'), **{k: T[k] for k in (

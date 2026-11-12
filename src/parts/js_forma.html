@@ -40,7 +40,10 @@
         })
       }).then(function (r) { return r.json(); }).then(function (data) {
         done();
-        if (data.success) { show('ok', 'ok'); form.reset(); } else { show('err', 'errSend'); }
+        if (data.success) {
+          show('ok', 'ok'); form.reset();
+          if (window.fbq) window.fbq('track', 'Lead'); // tikai ja ir mārketinga piekrišana (Pixel ielādēts)
+        } else { show('err', 'errSend'); }
       }).catch(function () { done(); show('err', 'errSend'); });
     });
   })();

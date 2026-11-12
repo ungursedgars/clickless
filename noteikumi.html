@@ -9,6 +9,11 @@
 <link rel="alternate" hreflang="lv" href="https://clickless.lv/noteikumi">
 <link rel="alternate" hreflang="en" href="https://clickless.lv/en/noteikumi">
 <link rel="alternate" hreflang="x-default" href="https://clickless.lv/noteikumi">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+</script>
 <meta name="theme-color" content="#ffffff">
 <script>
   // Uzliek tēmu vēl pirms lapas zīmēšanas, lai tumšajā režīmā nav balta zibšņa (kā pvnkalkulators.eu)
@@ -30,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Commissioner:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="/style.css?v=37ad3ca4">
+<link rel="stylesheet" href="/style.css?v=0987507b">
 </head>
 <body>
 
@@ -153,11 +158,112 @@
       <a href="/privatuma-politika">Privātuma politika</a>
       <a href="/noteikumi">Lietošanas noteikumi</a>
       <a href="/atsauksme">Atstāt atsauksmi</a>
+      <a href="#sikdatnes">Sīkdatņu iestatījumi</a>
       <span class="select">info@clickless.lv</span>
     </nav>
   </div>
 </footer>
 
+<div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Sīkdatņu piekrišana">
+  <div class="cookie-inner">
+    <div class="cookie-text"><strong class="cookie-title">Sīkdatnes</strong> Nepieciešamās sīkdatnes vietnes darbībai izmantojam vienmēr. Analītikas un mārketinga sīkdatnes (Google Analytics, Meta Pixel) ielādējam tikai ar jūsu piekrišanu. <a href="/privatuma-politika#sikdatnes" data-uz-politiku>Uzzināt vairāk</a></div>
+    <div class="cookie-actions"><button id="cookieReject" type="button">Noraidīt</button><button id="cookieSettingsBtn" type="button">Iestatījumi</button><button id="cookieAccept" type="button">Piekrītu visām</button></div>
+  </div>
+</div>
+<div id="cookiePrefs" role="dialog" aria-modal="true" aria-labelledby="prefsTitle">
+  <div class="prefs-card">
+    <div class="prefs-head"><h2 id="prefsTitle">Sīkdatņu iestatījumi</h2><button id="prefsClose" type="button" aria-label="Aizvērt">✕</button></div>
+    <div class="prefs-top-actions"><button id="prefsRejectAll" type="button">Noraidīt visas</button><button id="prefsAcceptAll" type="button">Pieņemt visas</button></div>
+    <p class="prefs-intro">Nepieciešamās sīkdatnes nevar atslēgt, jo tās glabā tikai jūsu iestatījumus. Pārējās tiek ielādētas tikai ar jūsu piekrišanu, un izvēli varat mainīt jebkurā brīdī.</p>
+    <div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name">Nepieciešamās</span><span class="prefs-always">Vienmēr ieslēgtas</span></div><p class="prefs-cat-desc">Gaišā/tumšā režīma un jūsu sīkdatņu izvēles iestatījumi. Glabājas tikai jūsu pārlūkā.</p></div>
+    <div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="swAnalyticsNos">Analītikas</span><button type="button" class="switch" id="swAnalytics" role="switch" aria-checked="false" aria-labelledby="swAnalyticsNos"><span class="knob"></span></button></div><p class="prefs-cat-desc">Google Analytics palīdz saprast, cik apmeklētāju ir vietnē un kuras lapas viņi lasa.</p></div>
+    <div class="prefs-cat"><div class="prefs-cat-row"><span class="prefs-cat-name" id="swMarketingNos">Mārketinga</span><button type="button" class="switch" id="swMarketing" role="switch" aria-checked="false" aria-labelledby="swMarketingNos"><span class="knob"></span></button></div><p class="prefs-cat-desc">Meta Pixel (Facebook un Instagram) ļauj mērīt mūsu reklāmu rezultātus un rādīt reklāmas cilvēkiem, kas apmeklējuši vietni.</p></div>
+    <button id="prefsSave" type="button">Saglabāt izvēli</button>
+  </div>
+</div>
+<script>
+  // Sīkdatņu piekrišana (pēc pvnkalkulators.eu parauga). Analītika un mārketings tiek ielādēti
+  // tikai pēc piekrišanas; izvēle glabājas localStorage, jautājam atkārtoti pēc 12 mēnešiem.
+  // ID ievieto build.py (SIKDATNES). Tukšs ID: rīks netiek ielādēts vispār.
+  (function () {
+    var GA4 = '', PIXEL = '', KEY = 'clickless-consent-v1', DERIGS_MS = 365 * 864e5;
+    var $ = function (id) { return document.getElementById(id); };
+    var banner = $('cookieBanner'), prefs = $('cookiePrefs'), swA = $('swAnalytics'), swM = $('swMarketing');
+    if (!banner || !prefs) return;
+    var gaLoaded = false, pixelLoaded = false;
+
+    function loadScript(src) { var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); }
+    function loadPixel() {
+      /* Meta Pixel standarta kods */
+      !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v;
+        s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s); }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('init', PIXEL);
+      window.fbq('track', 'PageView');
+    }
+    function apply(c) {
+      window.gtag('consent', 'update', {
+        analytics_storage: c.analytics ? 'granted' : 'denied',
+        ad_storage: c.marketing ? 'granted' : 'denied', ad_user_data: c.marketing ? 'granted' : 'denied', ad_personalization: c.marketing ? 'granted' : 'denied'
+      });
+      if (c.analytics && GA4 && !gaLoaded) {
+        gaLoaded = true;
+        loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA4);
+        window.gtag('js', new Date());
+        window.gtag('config', GA4);
+      }
+      if (c.marketing && PIXEL && !pixelLoaded) { pixelLoaded = true; loadPixel(); }
+      if (!c.marketing && pixelLoaded && window.fbq) window.fbq('consent', 'revoke');
+      if (c.marketing && pixelLoaded && window.fbq) window.fbq('consent', 'grant');
+    }
+    function read() {
+      try {
+        var c = JSON.parse(localStorage.getItem(KEY) || 'null');
+        if (c && Date.now() - (c.laiks || 0) < DERIGS_MS) return c;
+      } catch (e) {}
+      return null;
+    }
+    function save(c) { c.laiks = Date.now(); try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {} }
+
+    function setSw(sw, on) { sw.setAttribute('aria-checked', String(!!on)); }
+    function getSw(sw) { return sw.getAttribute('aria-checked') === 'true'; }
+    [swA, swM].forEach(function (sw) { sw.addEventListener('click', function () { setSw(sw, !getSw(sw)); }); });
+
+    function openPrefs() {
+      var c = read() || { analytics: false, marketing: false };
+      setSw(swA, c.analytics); setSw(swM, c.marketing);
+      prefs.classList.add('show');
+      $('prefsClose').focus();
+    }
+    function closePrefs(returnFocus) {
+      prefs.classList.remove('show');
+      if (returnFocus && banner.classList.contains('show')) $('cookieSettingsBtn').focus();
+    }
+    function finish(c) { save(c); apply(c); closePrefs(false); banner.classList.remove('show'); }
+
+    $('cookieAccept').addEventListener('click', function () { finish({ analytics: true, marketing: true }); });
+    $('cookieReject').addEventListener('click', function () { finish({ analytics: false, marketing: false }); });
+    $('cookieSettingsBtn').addEventListener('click', openPrefs);
+    $('prefsClose').addEventListener('click', function () { closePrefs(true); });
+    $('prefsRejectAll').addEventListener('click', function () { finish({ analytics: false, marketing: false }); });
+    $('prefsAcceptAll').addEventListener('click', function () { finish({ analytics: true, marketing: true }); });
+    $('prefsSave').addEventListener('click', function () { finish({ analytics: getSw(swA), marketing: getSw(swM) }); });
+    prefs.addEventListener('click', function (e) { if (e.target === prefs) closePrefs(true); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && prefs.classList.contains('show')) closePrefs(true); });
+
+    // Saite "#sikdatnes" (kājenē, privātuma politikā) atver iestatījumus jebkurā brīdī.
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[href$="#sikdatnes"]') : null;
+      if (!a || a.getAttribute('data-uz-politiku') !== null) return;
+      e.preventDefault(); openPrefs();
+    });
+
+    var c = read();
+    if (c) apply(c); else banner.classList.add('show');
+    if (location.hash === '#sikdatnes' && !document.getElementById('sikdatnes')) openPrefs();
+    window.clicklessCookies = openPrefs;
+  })();
+</script>
 <script>
   // Gaišā/tumšā režīma poga — tās pašas ikonas un loģika kā pvnkalkulators.eu
   (function () {

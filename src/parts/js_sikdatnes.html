@@ -1,0 +1,83 @@
+<script>
+  // Sīkdatņu piekrišana (pēc pvnkalkulators.eu parauga). Analītika un mārketings tiek ielādēti
+  // tikai pēc piekrišanas; izvēle glabājas localStorage, jautājam atkārtoti pēc 12 mēnešiem.
+  // ID ievieto build.py (SIKDATNES). Tukšs ID: rīks netiek ielādēts vispār.
+  (function () {
+    var GA4 = '__GA4__', PIXEL = '__PIXEL__', KEY = 'clickless-consent-v1', DERIGS_MS = 365 * 864e5;
+    var $ = function (id) { return document.getElementById(id); };
+    var banner = $('cookieBanner'), prefs = $('cookiePrefs'), swA = $('swAnalytics'), swM = $('swMarketing');
+    if (!banner || !prefs) return;
+    var gaLoaded = false, pixelLoaded = false;
+
+    function loadScript(src) { var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); }
+    function loadPixel() {
+      /* Meta Pixel standarta kods */
+      !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v;
+        s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s); }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('init', PIXEL);
+      window.fbq('track', 'PageView');
+    }
+    function apply(c) {
+      window.gtag('consent', 'update', {
+        analytics_storage: c.analytics ? 'granted' : 'denied',
+        ad_storage: c.marketing ? 'granted' : 'denied', ad_user_data: c.marketing ? 'granted' : 'denied', ad_personalization: c.marketing ? 'granted' : 'denied'
+      });
+      if (c.analytics && GA4 && !gaLoaded) {
+        gaLoaded = true;
+        loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA4);
+        window.gtag('js', new Date());
+        window.gtag('config', GA4);
+      }
+      if (c.marketing && PIXEL && !pixelLoaded) { pixelLoaded = true; loadPixel(); }
+      if (!c.marketing && pixelLoaded && window.fbq) window.fbq('consent', 'revoke');
+      if (c.marketing && pixelLoaded && window.fbq) window.fbq('consent', 'grant');
+    }
+    function read() {
+      try {
+        var c = JSON.parse(localStorage.getItem(KEY) || 'null');
+        if (c && Date.now() - (c.laiks || 0) < DERIGS_MS) return c;
+      } catch (e) {}
+      return null;
+    }
+    function save(c) { c.laiks = Date.now(); try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {} }
+
+    function setSw(sw, on) { sw.setAttribute('aria-checked', String(!!on)); }
+    function getSw(sw) { return sw.getAttribute('aria-checked') === 'true'; }
+    [swA, swM].forEach(function (sw) { sw.addEventListener('click', function () { setSw(sw, !getSw(sw)); }); });
+
+    function openPrefs() {
+      var c = read() || { analytics: false, marketing: false };
+      setSw(swA, c.analytics); setSw(swM, c.marketing);
+      prefs.classList.add('show');
+      $('prefsClose').focus();
+    }
+    function closePrefs(returnFocus) {
+      prefs.classList.remove('show');
+      if (returnFocus && banner.classList.contains('show')) $('cookieSettingsBtn').focus();
+    }
+    function finish(c) { save(c); apply(c); closePrefs(false); banner.classList.remove('show'); }
+
+    $('cookieAccept').addEventListener('click', function () { finish({ analytics: true, marketing: true }); });
+    $('cookieReject').addEventListener('click', function () { finish({ analytics: false, marketing: false }); });
+    $('cookieSettingsBtn').addEventListener('click', openPrefs);
+    $('prefsClose').addEventListener('click', function () { closePrefs(true); });
+    $('prefsRejectAll').addEventListener('click', function () { finish({ analytics: false, marketing: false }); });
+    $('prefsAcceptAll').addEventListener('click', function () { finish({ analytics: true, marketing: true }); });
+    $('prefsSave').addEventListener('click', function () { finish({ analytics: getSw(swA), marketing: getSw(swM) }); });
+    prefs.addEventListener('click', function (e) { if (e.target === prefs) closePrefs(true); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && prefs.classList.contains('show')) closePrefs(true); });
+
+    // Saite "#sikdatnes" (kājenē, privātuma politikā) atver iestatījumus jebkurā brīdī.
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[href$="#sikdatnes"]') : null;
+      if (!a || a.getAttribute('data-uz-politiku') !== null) return;
+      e.preventDefault(); openPrefs();
+    });
+
+    var c = read();
+    if (c) apply(c); else banner.classList.add('show');
+    if (location.hash === '#sikdatnes' && !document.getElementById('sikdatnes')) openPrefs();
+    window.clicklessCookies = openPrefs;
+  })();
+</script>
