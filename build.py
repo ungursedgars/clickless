@@ -94,7 +94,7 @@ T_ALL = {
 
 # Sīkdatņu rīki. Tukšs ID nozīmē, ka rīks netiek ielādēts vispār (arī pēc piekrišanas).
 # Meta Pixel ID: Meta Events Manager → Data sources. GA4: Google Analytics → Admin → Data streams (G-...).
-SIKDATNES = {'ga4': '', 'meta_pixel': ''}
+SIKDATNES = {'ga4': '', 'meta_pixel': '2250163739249788'}
 
 T_ALL['lv'].update({
     'sik_aria': 'Sīkdatņu piekrišana', 'sik_virsraksts': 'Sīkdatnes',
