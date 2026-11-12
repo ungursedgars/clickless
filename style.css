@@ -127,6 +127,15 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 }
 #themeBtn:hover { border-color: var(--accent); color: var(--brand-text); }
 
+/* Valodas pārslēdzējs LV/EN: tāda pati kaste kā tēmas pogai, redzams arī telefonā */
+.nav > a.lang-switch {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  min-width: 36px; height: 36px; padding: 0 .5rem; border: 1px solid var(--line); border-radius: 8px;
+  font-family: var(--f-mono, monospace); font-size: .8rem; font-weight: 600; letter-spacing: .04em; color: var(--ink);
+}
+.nav > a.lang-switch:hover { border-color: var(--accent); color: var(--brand-text); }
+@media (max-width: 760px) { .nav > a.lang-switch { display: inline-flex; height: 40px; min-width: 40px; } }
+
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
   padding: 0.8rem 1.25rem; border-radius: 999px; border: 1px solid transparent;

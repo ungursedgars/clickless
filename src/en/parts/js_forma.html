@@ -1,0 +1,47 @@
+<script>
+  // Contact form: Web3Forms (fetch/JSON, no page reload), same as the Latvian page.
+  (function () {
+    var WEB3FORMS_ACCESS_KEY = '1b3a3020-3223-46bb-9923-6e935b1da2f5';
+    var T = {
+      send: 'Send', sending: 'Sending…',
+      ok: 'Thank you! Your message has been sent. We will reply within one working day.',
+      errFields: 'Please enter your email and a message.',
+      errEmail: 'Please enter a valid email address.',
+      errSend: 'Sending failed. Please try again later or write to info@clickless.lv.',
+      subject: 'New message from clickless.lv (English)'
+    };
+    var form = document.getElementById('contactForm');
+    if (!form) return;
+    var btn = document.getElementById('submitBtn'), msg = document.getElementById('formMsg');
+    var nameEl = document.getElementById('cfName'), emailEl = document.getElementById('cfEmail'), msgEl = document.getElementById('cfMsg');
+    var honeyEl = form.querySelector('[name="botcheck"]');
+    function show(kind, key) { msg.className = 'form-msg show ' + kind; msg.textContent = T[key]; }
+    function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+    function done() { btn.disabled = false; btn.textContent = T.send; }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (honeyEl.checked) return; // spam
+      if (!emailEl.value.trim() || !msgEl.value.trim()) { show('err', 'errFields'); return; }
+      if (!validEmail(emailEl.value.trim())) { show('err', 'errEmail'); return; }
+      btn.disabled = true; btn.textContent = T.sending;
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: nameEl.value.trim(),
+          email: emailEl.value.trim(),
+          tema: (document.getElementById('cfTopic') || {}).value || '',
+          message: msgEl.value.trim(),
+          valoda: 'EN',
+          subject: T.subject,
+          from_name: 'clickless.lv'
+        })
+      }).then(function (r) { return r.json(); }).then(function (data) {
+        done();
+        if (data.success) { show('ok', 'ok'); form.reset(); } else { show('err', 'errSend'); }
+      }).catch(function () { done(); show('err', 'errSend'); });
+    });
+  })();
+</script>

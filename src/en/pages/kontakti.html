@@ -1,0 +1,59 @@
+<!--meta
+title: Contact – CLICKLESS
+description: Tell us what you want to automate. We reply within one working day, and the first call is free.
+nav: kontakti
+-->
+<main>
+  <section class="band" id="kontakti">
+    <div class="wrap contact">
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Contact</span>
+        <h1 class="h2">Tell us what you want to automate</h1>
+        <p class="lead">Invoices, cash register Z reports, bookings, an online shop, video or any other task you do again and again: every day, week or month. Describe how it works now.</p>
+        <ol class="next-steps">
+          <li><strong>We reply within one working day</strong><span>With a couple of clarifying questions.</span></li>
+          <li><strong>A 15–30 minute call</strong><span>Free and with no obligation. We show you how it would look in your company.</span></li>
+          <li><strong>A concrete offer</strong><span>With a price and a timeline. Ready-made bots are set up within one day.</span></li>
+        </ol>
+      </div>
+      <div class="contact-card">
+        <form id="contactForm" method="POST" novalidate>
+          <div class="field">
+            <label class="field-label" for="cfName">Name</label>
+            <input type="text" id="cfName" name="name" autocomplete="name" placeholder="Your name">
+          </div>
+          <div class="field">
+            <label class="field-label" for="cfEmail">Email <span class="req">*</span></label>
+            <input type="email" id="cfEmail" name="email" autocomplete="email" required placeholder="you@company.com">
+          </div>
+          <div class="field">
+            <label class="field-label" for="cfTopic">What are you interested in?</label>
+            <select id="cfTopic" name="topic">
+              <option value="">Choose if you know</option>
+              <option>Ready-made bots (invoices, cash register, bookings)</option>
+              <option>Documents and bookkeeping</option>
+              <option>E-commerce</option>
+              <option>YouTube, Instagram and TikTok</option>
+              <option>Customers, team and daily work</option>
+              <option>Website</option>
+              <option>Not sure yet, I’d like to talk</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="cfMsg">Message <span class="req">*</span></label>
+            <textarea id="cfMsg" name="message" required placeholder="What documents do you have, and where does the time go?"></textarea>
+          </div>
+
+          <!-- Spam trap (not shown to people) -->
+          <input class="honey" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+
+          <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">Send</button>
+          <p class="form-note">Or write to <strong>info@clickless.lv</strong>. We will reply within one working day.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+{{part:js_forma}}
