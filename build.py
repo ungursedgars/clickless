@@ -387,6 +387,7 @@ def izkartot(saturs, fails, ir_otra_valoda):
 <title>%(title)s</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="%(desc)s">%(robots)s%(alternate)s
+<meta name="facebook-domain-verification" content="85fq8s0f2z1rcaz5doer52un35b076">
 %(sik_head)s
 %(tema_head)s
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
